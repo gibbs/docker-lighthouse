@@ -1,0 +1,14 @@
+name: Lint Dockerfile
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-dockerfile:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hadolint/hadolint-action@v1.4.0
+        with:
+          dockerfile: Dockerfile
