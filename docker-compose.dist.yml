@@ -3,4 +3,4 @@ version: '2'
 services:
   lighthouse:
     tty: true
-    image: docker.io/gibbs/lighthouse:latest
+    image: docker.io/genv/lighthouse:latest

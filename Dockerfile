@@ -22,11 +22,18 @@ RUN apt-get update -qq && \
     cat /etc/apt/sources.list.d/nodesource.list && \
     apt-get install -y --no-install-recommends \
         nodejs && \
-    npm i -g lighthouse && \
-    apt-get remove -y curl && \
+    npm i -g --production lighthouse && \
+    apt-get purge -y curl && \
     apt-get autoremove -y && \
     apt-get clean && apt-get autoclean -y && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives && \
+    rm -rf \
+        /var/lib/apt/lists/* \
+        /var/cache/debconf/*-old \
+        /var/lib/dpkg/*-old/ \
+        /usr/share/man/* \
+        /usr/share/doc/**/*.gz \
+        /usr/share/locale/ \
+        && \
     useradd --create-home --shell /bin/sh -G audio,video lighthouse && \
     mkdir -p /home/lighthouse/reports && \
     chown -R lighthouse:lighthouse /home/lighthouse/*
