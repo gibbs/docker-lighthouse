@@ -1,6 +1,6 @@
 # Docker Lighthouse
 
-![Docker](https://github.com/Gibbs/docker-lighthouse/actions/workflows/tests.yml/badge.svg)
+![Docker](https://github.com/Gibbs/docker-lighthouse/actions/workflows/build.yml/badge.svg)
 
 A [Lighthouse](https://github.com/GoogleChrome/lighthouse) Chromium Docker 
 image.
