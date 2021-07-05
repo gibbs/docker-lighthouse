@@ -53,7 +53,7 @@ jobs:
           context: .
           file: Dockerfile
           platforms: linux/amd64
-          push: false
+          push: true
           tags: |
             genv/lighthouse:${{ steps.meta.outputs.build_version }}
             genv/lighthouse:${{ steps.meta.outputs.build_version }}-${{ steps.meta.outputs.build_date }}
