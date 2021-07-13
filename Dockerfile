@@ -12,7 +12,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
         ca-certificates \
         curl \
         fonts-freefont-ttf \
-        fonts-liberation; \
+        fonts-liberation \
+        jq; \
     curl -L https://deb.nodesource.com/setup_14.x | bash -; \
     cat /etc/apt/sources.list.d/nodesource.list; \
     apt-get install -y --no-install-recommends \
