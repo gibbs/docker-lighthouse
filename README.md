@@ -2,8 +2,8 @@
 
 ![Docker](https://github.com/Gibbs/docker-lighthouse/actions/workflows/build.yml/badge.svg)
 
-A [Lighthouse](https://github.com/GoogleChrome/lighthouse) Chromium Docker 
-image.
+A [Lighthouse](https://github.com/GoogleChrome/lighthouse) Docker image using 
+Debian and Chromium.
 
 ## Example Usage
 
