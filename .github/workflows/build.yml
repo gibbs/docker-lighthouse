@@ -9,13 +9,14 @@ on:
       - 'master'
   schedule:
     - cron: '15 4 1 * *'
+  workflow_dispatch:
 
 jobs:
   lint:
     name: Lint Dockerfile
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: hadolint/hadolint-action@v1.4.0
         with:
           dockerfile: Dockerfile
@@ -26,29 +27,29 @@ jobs:
     needs: [lint]
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Build Meta
         id: meta
         run: |
-          echo "::set-output name=build_version::$(echo $(npm show lighthouse version))"
-          echo "::set-output name=build_date::$(echo $(date -u "+%Y%m%dT%H%M%SZ"))"
+          echo "build_version=$(echo $(npm show lighthouse version))" >> $GITHUB_OUTPUT
+          echo "build_date=$(echo $(date -u "+%Y%m%dT%H%M%SZ"))" >> $GITHUB_OUTPUT
           exit ${PIPESTATUS[0]}
 
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         if: github.event_name != 'pull_request'
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: Dockerfile
