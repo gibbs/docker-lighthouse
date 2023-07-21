@@ -1,6 +1,7 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Dan Gibbs <dev@dangibbs.co.uk>"
 
+ARG lighthouse_version=latest
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
@@ -11,14 +12,16 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
         chromium-sandbox \
         ca-certificates \
         curl \
+        git \
         fonts-freefont-ttf \
         fonts-liberation \
         jq; \
-    curl -L https://deb.nodesource.com/setup_14.x | bash -; \
+    curl -L https://deb.nodesource.com/setup_18.x | bash -; \
     cat /etc/apt/sources.list.d/nodesource.list; \
     apt-get install -y --no-install-recommends \
         nodejs; \
-    npm i -g --production lighthouse@latest; \
+    npm update -g npm; \
+    npm i -g --omit=dev lighthouse@${lighthouse_version}; \
     apt-get purge -y curl; \
     apt-get autoremove -y; \
     apt-get clean && apt-get autoclean -y && \
