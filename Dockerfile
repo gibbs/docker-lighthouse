@@ -1,4 +1,4 @@
-FROM docker.io/bitnami/minideb:buster
+FROM docker.io/bitnami/minideb:bookworm
 LABEL maintainer "Dan Gibbs <dev@dangibbs.co.uk>"
 
 ARG lighthouse_version=latest
@@ -16,7 +16,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
         fonts-freefont-ttf \
         fonts-liberation \
         jq; \
-    curl -L https://deb.nodesource.com/setup_18.x | bash -; \
+    curl -L https://deb.nodesource.com/setup_20.x | bash -; \
     cat /etc/apt/sources.list.d/nodesource.list; \
     apt-get install -y --no-install-recommends \
         nodejs; \
